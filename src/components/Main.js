@@ -12,7 +12,7 @@ const Main = () => {
     useEffect(() => {
 
         if (employees.length === 0) {
-            API.getDirectory(10).then((res) => {
+            API.getDirectory(100).then((res) => {
                 console.log(res)
                 setEmployees(res.data.results)
                 setEmployeeCopy(res.data.results)
@@ -67,13 +67,13 @@ const Main = () => {
         setToggle(true)
         console.log(toggle)
 
-    
+
     }
 
     return (
 
         <div>
-            <div className="jumbotron jumbotron-fluid">
+            <div className="jumbotron jumbotron-fluid" style={{textAlign:"center", backgroundColor: "lightGray"}}>
                 <h1>Employee Directory</h1>
             </div>
 
@@ -98,31 +98,38 @@ const Main = () => {
 
                 </div>
 
-                <div className="row">
 
-                    <div className="col">
-                    </div>
-                    <div className="col"><button type="button" className="btn btn-light" onClick={() => sortEmployees("name")}>First Name</button></div>
-                    <div className="col"><button type="button" className="btn btn-light" onClick={() => sortEmployees("lastN")}>Last Name</button></div>
-                    <div className="col"><button type="button" className="btn btn-light" onClick={() => sortEmployees("email")}>e-mail</button></div>
-                </div>
+                <table className="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Photo</th>
+                            <th scope="col">First Name <button type="button" className="btn btn-light" onClick={() => sortEmployees("name")}>↓</button></th>
+                            <th scope="col">Last Name<button type="button" className="btn btn-light" onClick={() => sortEmployees("lastN")}>↓</button></th>
+                            <th scope="col">e-mail <button type="button" className="btn btn-light" onClick={() => sortEmployees("email")}>↓</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {employees.length ? (
+                            employees.map((employee,id) => (
+                                <tr key={employee.id.value}>
+                                    
+                                    <th scope="row">{id}</th>
+                                        <td ><img src={employee.picture.thumbnail} alt={employee.name} /></td>
+                                        <td >{employee.name.first}</td>
+                                        <td >{employee.name.last}</td>
+                                        <td >{employee.email} </td>
+                                 
+                                </tr>
+                            ))
 
-                {employees.length ? (
+                        ) : (
+                                <h3>No Results to Display</h3>
+                            )}
+                        
+                    </tbody>
+                </table>
 
-                    employees.map(employee => (
-                        <div key={employee.id.value}>
-                            <div className="row">
-                                <div className="col"><img src={employee.picture.thumbnail} alt={employee.name} /></div>
-                                <div className="col">{employee.name.first}</div>
-                                <div className="col">{employee.name.last}</div>
-                                <div className="col">{employee.email} </div>
-                            </div>
-                        </div>
-                    ))
-
-                ) : (
-                        <h3>No Results to Display</h3>
-                    )}
             </div>
         </div>
     )
