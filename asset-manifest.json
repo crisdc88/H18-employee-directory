@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/crisdc88/H18-employee-directory/static/js/main.fabaaaac.chunk.js",
+    "main.js.map": "/crisdc88/H18-employee-directory/static/js/main.fabaaaac.chunk.js.map",
+    "runtime-main.js": "/crisdc88/H18-employee-directory/static/js/runtime-main.0aa98dec.js",
+    "runtime-main.js.map": "/crisdc88/H18-employee-directory/static/js/runtime-main.0aa98dec.js.map",
+    "static/js/2.bf9b564a.chunk.js": "/crisdc88/H18-employee-directory/static/js/2.bf9b564a.chunk.js",
+    "static/js/2.bf9b564a.chunk.js.map": "/crisdc88/H18-employee-directory/static/js/2.bf9b564a.chunk.js.map",
+    "index.html": "/crisdc88/H18-employee-directory/index.html",
+    "precache-manifest.ec7d50ef4d6f40e687282efe5be7b107.js": "/crisdc88/H18-employee-directory/precache-manifest.ec7d50ef4d6f40e687282efe5be7b107.js",
+    "service-worker.js": "/crisdc88/H18-employee-directory/service-worker.js",
+    "static/js/2.bf9b564a.chunk.js.LICENSE.txt": "/crisdc88/H18-employee-directory/static/js/2.bf9b564a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0aa98dec.js",
+    "static/js/2.bf9b564a.chunk.js",
+    "static/js/main.fabaaaac.chunk.js"
+  ]
+}
