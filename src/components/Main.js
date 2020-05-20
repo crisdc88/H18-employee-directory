@@ -6,15 +6,29 @@ const Main = () => {
     const [employeeCopy, setEmployeeCopy] = useState([]);
     const [employees, setEmployees] = useState([]);
     const [search, setSearch] = useState({})
+    const [toggle, setToggle] = useState(false)
 
 
     useEffect(() => {
-        API.getDirectory(10).then((res) => {
-            console.log(res)
-            setEmployees(res.data.results)
-            setEmployeeCopy(res.data.results)
-        })
-    }, [])
+
+        if (employees.length === 0) {
+            API.getDirectory(10).then((res) => {
+                console.log(res)
+                setEmployees(res.data.results)
+                setEmployeeCopy(res.data.results)
+            })
+        }
+        if (toggle) {
+            console.log("toggle true")
+            let tempEmployee = [...employeeCopy].filter(item => { return item.name.first.toLowerCase().indexOf(search.searchName) > -1 })
+            setEmployees(tempEmployee)
+            console.log(tempEmployee)
+            setToggle(false);
+        }
+
+
+
+    }, [employees, toggle])
     //name - email - picture - phone
 
 
@@ -23,7 +37,7 @@ const Main = () => {
         // sort array by name:
 
         console.log(field)
-       
+
         switch (field) {
             case "name":
                 let sortedName = [...employees]
@@ -41,22 +55,19 @@ const Main = () => {
                 setEmployees(sortedEmail);
                 break;
             default:
-                
+
         }
     }
 
     const searchByName = (event) => {
         // setSearch({ searchName: event.target.value })
         const { name, value } = event.target;
-
+        console.log(toggle)
         setSearch({ [name]: value })
+        setToggle(true)
+        console.log(toggle)
 
-        ///filter employee with the value of {formObject.searchName}, get new array and set the employee array
-
-        console.log(search.searchName)
-        let tempEmployee = [...employeeCopy].filter(item => { return item.name.first.toLowerCase().indexOf(search.searchName) > -1 })
-        setEmployees(tempEmployee)
-        console.log(tempEmployee)
+    
     }
 
     return (
@@ -66,29 +77,27 @@ const Main = () => {
                 <h1>Employee Directory</h1>
             </div>
 
-
-            {/* form */}
-            <div>
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="formGroupExampleInput">Search by first Name</label>
-                        <input
-
-                            type="text"
-                            className="form-control"
-                            placeholder="Example input placeholder"
-                            onChange={searchByName}
-                            name="searchName"
-
-                        />
-                    </div>
-                </form>
-                {/* <p>{search.searchName}</p> */}
-
-            </div>
-
-
             <div className="container">
+                {/* form */}
+                <div>
+                    <form>
+                        <div className="form-group">
+                            <label htmlFor="formGroupExampleInput">Search by first Name</label>
+                            <input
+
+                                type="text"
+                                className="form-control"
+                                placeholder="Example input placeholder"
+                                onChange={searchByName}
+                                name="searchName"
+
+                            />
+                        </div>
+                    </form>
+                    {/* <p>{search.searchName}</p> */}
+
+                </div>
+
                 <div className="row">
 
                     <div className="col">
