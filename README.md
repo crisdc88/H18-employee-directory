@@ -1,53 +1,104 @@
-# Unit 19 React Homework: Employee Directory
+# H11-GET-GROCERIES
 
-## Overview
+Welcome Employee Directory
 
-For this assignment, you'll create a employee directory with React. This assignment will require you to break up your application's UI into components, manage component state, and respond to user events.
+## Summary
 
-## User Story
+This application will allow you to se a Employee Directory, sort the result by First Name, Last Name, e-mail.  Also I will allow you to filter records by First Nmae
 
-* As a user, I want to be able to view my entire employee directory at once so that I have quick access to their information.
+## GettingStarted
 
-## Business Context
+Project Location
 
-An employee or manager would benefit greatly from being able to view non-sensitive data about other employees. It would be particularly helpful to be able to filter employees by name.
+>[Project's GitHub repository](https://github.com/crisdc88/H18-employee-directory)
 
-## Acceptance Criteria
+## Prerequisites
 
-Given a table of random users, when the user loads the page, a table of employees should render. 
+>NA
 
-The user should be able to:
+## Built With
 
-  * Sort the table by at least one category
+>* Node js
+>* React
+>* HTML
+>* CSS
 
-  * Filter the users by at least one property.
+## Installation
 
-## Commit Early and Often
+If you want to download this project follow these steps.
 
-One of the most important skills to master as a web developer is version control. Building the habit of committing via Git is important for two reasons:
+To run this application on your local machine follow these steps:
 
-1. Your commit history is a signal to employers that you are actively working on projects and learning new skills
+>1. Clone project from github.
+>2. Copy sql statements found in db/query.sql and run the statements on your mySQL application.
+>3. Open the terminal and go to the project's path
+>4. run command: npm install
+>5. run command: npm start
 
-2. Your commit history allows you to revert your code base in the event that you need to return to a previous state
+## Deployed Link
 
-Follow these guidelines for committing:
+>
 
-* Make single purpose commits for related changes to ensure a clean, manageable history. If you are fixing two issues, make two commits
+## Code-Snippets
 
-* Write descriptive, meaningful commit messages so that you and anyone else looking at your repository can easily understand its history
+The following snippet shows the use of Hooks.  In this case 4 type of states were implemented.  
 
-* Don't commit half done work, for the sake of your collaborators (and your future self!)
+1. The employee hook to manage the emloyee array and render the employee list every time there's a change.
 
-* Test your application before you commit to ensure functionality at every step in the development process
+2. The Search Hook to manage the search filter so every time there's an input the employee list will change to show only the employees that have thos characters in their name.
 
-We would like you to have well over 200 commits by graduation, so commit early and often!
+3. The toggle hook, so only when there's a change on the search form the setEmployee get's called.
+
+```sh
+    const [employeeCopy, setEmployeeCopy] = useState([]);
+    const [employees, setEmployees] = useState([]);
+    const [search, setSearch] = useState({})
+    const [toggle, setToggle] = useState(false)
 
 
-## Submission on BCS
+    useEffect(() => {
 
-You are required to submit the following:
+        if (employees.length === 0) {
+            API.getDirectory(100).then((res) => {
+                console.log(res)
+                setEmployees(res.data.results)
+                setEmployeeCopy(res.data.results)
+            })
+        }
+        if (toggle) {
+            console.log("toggle true")
+            let tempEmployee = [...employeeCopy].filter(item => { return item.name.first.toLowerCase().indexOf(search.searchName) > -1 })
+            setEmployees(tempEmployee)
+            console.log(tempEmployee)
+            setToggle(false);
+        }
 
-* the URL to the deployed application
 
-* the URL to the Github repository
+
+    }, [employees, toggle])
+
+
+
+
+```
+
+## Screen shots / gifs
+
+![consoleInput](./screenshot1.png)
+
+![gif](./employeedir.gif)
+
+## Author
+
+<img src="https://avatars.githubusercontent.com/u/61372364?" alt="avatar" style="border-radius:20px" width="30"/>
+
+D. Cristina Terry
+
+GitHub: [https://github.com/crisdc88/](https://github.com/crisdc88/),
+
+LinkedIn: [www.linkedin.com/in/dcristinaterry](www.linkedin.com/in/dcristinaterry)
+
+## License
+
+![license](https://img.shields.io/badge/license-MIT-green)
 
